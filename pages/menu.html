@@ -1,0 +1,173 @@
+
+ <link rel="stylesheet" href="css/style.css">
+<div style="background: linear-gradient(135deg, var(--green-dark), var(--green-mid)); padding: 60px 20px; text-align:center; color:var(--white);">
+  <h1 class="section-title fade-in" style="color:var(--white)">🍽 Манай цэс</h1>
+  <p style="opacity:0.8;margin-top:8px">Өдөр бүр шинэлэг, чанартай хоол</p>
+</div>
+
+<div class="section">
+
+  <div class="tabs-container fade-in">
+    <div class="tab-nav">
+      <button class="tab-btn active" data-tab="tab-main">🍖 Үндсэн хоол</button>
+      <button class="tab-btn" data-tab="tab-fast">🍔 Хурдан хоол</button>
+      <button class="tab-btn" data-tab="tab-salad">🥗 Салад & Шөл</button>
+      <button class="tab-btn" data-tab="tab-drinks">☕ Ундаа</button>
+    </div>
+
+    <div class="tab-panel active" id="tab-main">
+      <div class="grid-3">
+        <div class="card fade-in">
+          <div class="food-img steak">🥩
+            <span class="food-badge">Шинэ</span>
+          </div>
+          <div class="card-body">
+            <div class="card-title">Монгол стейк</div>
+            <p class="card-text">Үхрийн мах, цагаан будаа, ногоо</p>
+            <div style="display:flex;justify-content:space-between;align-items:center;margin-top:12px">
+              <span class="card-price">12,000₮</span>
+              <a class="btn btn-green" style="padding:8px 16px;font-size:0.85rem" data-nav="order.html">Захиалах</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="card fade-in delay-1">
+          <div class="food-img noodle">🍜</div>
+          <div class="card-body">
+            <div class="card-title">Гоймон</div>
+            <p class="card-text">Гахайн мах, гоймон, ногоо</p>
+            <div style="display:flex;justify-content:space-between;align-items:center;margin-top:12px">
+              <span class="card-price">4,000₮</span>
+              <a class="btn btn-green" style="padding:8px 16px;font-size:0.85rem" data-nav="order.html">Захиалах</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="card fade-in delay-2">
+          <div class="food-img soup">🍲
+            <span class="food-badge">Хямдрал</span>
+          </div>
+          <div class="card-body">
+            <div class="card-title">Будаатай хоол</div>
+            <p class="card-text">Тахианы мах, будаа, карри шөл</p>
+            <div style="display:flex;justify-content:space-between;align-items:center;margin-top:12px">
+              <span class="card-price">5,500₮</span>
+              <a class="btn btn-green" style="padding:8px 16px;font-size:0.85rem" data-nav="order.html">Захиалах</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="tab-panel" id="tab-fast">
+      <div class="grid-3">
+        <div class="card fade-in">
+          <div class="food-img burger">🍔
+            <span class="food-badge">Алдартай</span>
+          </div>
+          <div class="card-body">
+            <div class="card-title">Бургер</div>
+            <p class="card-text">Үхрийн котлет, ногоо, мазгар</p>
+            <div style="display:flex;justify-content:space-between;align-items:center;margin-top:12px">
+              <span class="card-price">5,000₮</span>
+              <a class="btn btn-green" style="padding:8px 16px;font-size:0.85rem" data-nav="order.html">Захиалах</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="card fade-in delay-1">
+          <div class="food-img pizza">🍕</div>
+          <div class="card-body">
+            <div class="card-title">Пицца</div>
+            <p class="card-text">Маргарита, колбас, хулуу</p>
+            <div style="display:flex;justify-content:space-between;align-items:center;margin-top:12px">
+              <span class="card-price">8,000₮</span>
+              <a class="btn btn-green" style="padding:8px 16px;font-size:0.85rem" data-nav="order.html">Захиалах</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="card fade-in delay-2">
+          <div class="food-img steak" style="background: linear-gradient(135deg, #5c3317, #a0522d)">🌮</div>
+          <div class="card-body">
+            <div class="card-title">Сандвич</div>
+            <p class="card-text">Тахиа, гичий, ногоо, талх</p>
+            <div style="display:flex;justify-content:space-between;align-items:center;margin-top:12px">
+              <span class="card-price">4,500₮</span>
+              <a class="btn btn-green" style="padding:8px 16px;font-size:0.85rem" data-nav="order.html">Захиалах</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="tab-panel" id="tab-salad">
+      <div class="grid-3">
+        <div class="card fade-in">
+          <div class="food-img salad">🥗</div>
+          <div class="card-body">
+            <div class="card-title">Цэцэг байцааны салад</div>
+            <p class="card-text">Байцаа, лооль, манжин, хулуу, оливын тос</p>
+            <div style="display:flex;justify-content:space-between;align-items:center;margin-top:12px">
+              <span class="card-price">3,000₮</span>
+              <a class="btn btn-green" style="padding:8px 16px;font-size:0.85rem" data-nav="order.html">Захиалах</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="card fade-in delay-1">
+          <div class="food-img soup" style="background: linear-gradient(135deg, #1a3d2b, #277da1)">🍵</div>
+          <div class="card-body">
+            <div class="card-title">Тоорцогт шөл</div>
+            <p class="card-text">Мах, тоорцог, хүрэн будаа</p>
+            <div style="display:flex;justify-content:space-between;align-items:center;margin-top:12px">
+              <span class="card-price">3,500₮</span>
+              <a class="btn btn-green" style="padding:8px 16px;font-size:0.85rem" data-nav="order.html">Захиалах</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="tab-panel" id="tab-drinks">
+      <div class="grid-3">
+        <div class="card fade-in">
+          <div class="food-img" style="background:linear-gradient(135deg,#6f4e37,#a0522d);font-size:3rem">☕</div>
+          <div class="card-body">
+            <div class="card-title">Кофе</div>
+            <p class="card-text">Эспрессо, Американо, Капучино</p>
+            <div style="display:flex;justify-content:space-between;align-items:center;margin-top:12px">
+              <span class="card-price">2,500₮</span>
+              <a class="btn btn-green" style="padding:8px 16px;font-size:0.85rem" data-nav="order.html">Захиалах</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="card fade-in delay-1">
+          <div class="food-img" style="background:linear-gradient(135deg,#52b788,#95d5b2);font-size:3rem">🍵</div>
+          <div class="card-body">
+            <div class="card-title">Цай</div>
+            <p class="card-text">Ногоон цай, Нохой хүнсний цай</p>
+            <div style="display:flex;justify-content:space-between;align-items:center;margin-top:12px">
+              <span class="card-price">1,500₮</span>
+              <a class="btn btn-green" style="padding:8px 16px;font-size:0.85rem" data-nav="order.html">Захиалах</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="card fade-in delay-2">
+          <div class="food-img" style="background:linear-gradient(135deg,#f4a261,#e9c46a);font-size:3rem">🧃</div>
+          <div class="card-body">
+            <div class="card-title">Жүүс</div>
+            <p class="card-text">Алим, улаан лооль, улбаар</p>
+            <div style="display:flex;justify-content:space-between;align-items:center;margin-top:12px">
+              <span class="card-price">2,000₮</span>
+              <a class="btn btn-green" style="padding:8px 16px;font-size:0.85rem" data-nav="order.html">Захиалах</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>

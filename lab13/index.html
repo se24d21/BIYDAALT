@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="mn">
+<head>
+    <meta charset="UTF-8">
+    <title>Лаборатори 13 - AJAX & JSON</title>
+    <style>
+        body { font-family: Arial; padding: 20px; line-height: 1.6; }
+        .container { max-width: 900px; margin: auto; }
+        .controls { margin-bottom: 20px; display: flex; gap: 10px; }
+        button { padding: 10px; cursor: pointer; background: #2563eb; color: white; border: none; border-radius: 4px; }
+        table { width: 100%; border-collapse: collapse; margin-top: 20px; }
+        th, td { border: 1px solid #ddd; padding: 12px; text-align: left; }
+        th { background-color: #f4f4f4; }
+        #display-area { border: 2px dashed #ccc; padding: 20px; margin-top: 20px; min-height: 100px; }
+        .status-true { color: red; font-weight: bold; }
+        .status-false { color: green; }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h2>AJAX Лабораторийн ажил</h2>
+    
+    <div class="controls">
+        <button onclick="loadSyncGet()">Синхрон GET</button>
+        <button onclick="loadAsyncPost()">Асинхрон POST</button>
+        <button onclick="loadStudentJSON()">Оюутны мэдээлэл (JSON)</button>
+    </div>
+
+    <div id="display-area">
+        Энд мэдээлэл харагдана...
+    </div>
+</div>
+
+<script>
+    const display = document.getElementById("display-area");
+
+    function loadSyncGet() {
+        const xhr = new XMLHttpRequest();
+        xhr.open("GET", "content.html", false); 
+        try {
+            xhr.send();
+            display.innerHTML = "<h3>Синхрон GET үр дүн:</h3>" + xhr.responseText;
+        } catch (e) {
+            display.innerHTML = "Алдаа: 'content.html' файл олдсонгүй.";
+        }
+    }
+
+    function loadAsyncPost() {
+        const xhr = new XMLHttpRequest();
+        xhr.open("POST", "server_test.php", true);
+        xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+        
+        xhr.onreadystatechange = function() {
+            if (this.readyState == 4 && this.status == 200) {
+                display.innerHTML = "<h3>Асинхрон POST үр дүн:</h3>" + this.responseText;
+            }
+        };
+        xhr.send("user=Student&action=test");
+    }
+
+    function loadStudentJSON() {
+        const xhr = new XMLHttpRequest();
+        xhr.open("GET", "data.json", true);
+
+        xhr.onreadystatechange = function() {
+            if (this.readyState == 4 && this.status == 200) {
+                const students = JSON.parse(this.responseText);
+                let tableHtml = `
+                    <h3>Оюутны жагсаалт (JSON-оос)</h3>
+                    <table>
+                        <tr>
+                            <th>Овог</th>
+                            <th>Нэр</th>
+                            <th>Код</th>
+                            <th>Нас</th>
+                            <th>Төрсөн огноо</th>
+                            <th>Голч</th>
+                            <th>Чөлөөтэй эсэх</th>
+                        </tr>`;
+
+                students.forEach(s => {
+                    tableHtml += `
+                        <tr>
+                            <td>${s.last_name}</td>
+                            <td>${s.first_name}</td>
+                            <td>${s.code}</td>
+                            <td>${s.age}</td>
+                            <td>${s.birth_date}</td>
+                            <td>${s.gpa}</td>
+                            <td class="${s.on_leave ? 'status-true' : 'status-false'}">
+                                ${s.on_leave ? 'Тийм' : 'Үгүй'}
+                            </td>
+                        </tr>`;
+                });
+
+                tableHtml += "</table>";
+                display.innerHTML = tableHtml;
+            }
+        };
+        xhr.send();
+    }
+</script>
+
+</body>
+</html>

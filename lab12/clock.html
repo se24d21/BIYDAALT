@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="mn">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ханын цаг</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: sans-serif;
+      background: #f5f5f5;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      gap: 16px;
+    }
+    #themeRow {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+    #themeRow button {
+      font-size: 12px;
+      padding: 6px 16px;
+      border-radius: 20px;
+      border: 1px solid #ccc;
+      background: white;
+      cursor: pointer;
+    }
+    #themeRow button.active {
+      background: #e0e0e0;
+      border-color: #888;
+    }
+    #digitalTime {
+      font-size: 32px;
+      font-weight: 500;
+      letter-spacing: 6px;
+      font-family: monospace;
+      color: #111;
+    }
+    #dateDisplay {
+      font-size: 13px;
+      color: #666;
+      letter-spacing: 1px;
+    }
+  </style>
+</head>
+<body>
+
+  <div id="themeRow">
+    <button onclick="setTheme('midnight')" id="btn-midnight" class="active">Шөнө</button>
+    <button onclick="setTheme('ivory')"    id="btn-ivory">Цагаан</button>
+    <button onclick="setTheme('slate')"    id="btn-slate">Хөх саарал</button>
+    <button onclick="setTheme('rose')"     id="btn-rose">Ягаан</button>
+    <button onclick="setTheme('forest')"   id="btn-forest">Ногоон</button>
+  </div>
+
+  <canvas id="clock" width="380" height="380" style="display:block; border-radius:50%;"></canvas>
+
+  <div style="display:flex; flex-direction:column; align-items:center; gap:4px;">
+    <div id="digitalTime">00:00:00</div>
+    <div id="dateDisplay"></div>
+  </div>
+
+  <script>
+    const canvas = document.getElementById('clock');
+    const ctx    = canvas.getContext('2d');
+    const SIZE   = canvas.width;
+    const CX     = SIZE / 2;
+    const CY     = SIZE / 2;
+    const R      = SIZE / 2 * 0.88;
+
+    const THEMES = {
+      midnight: {
+        bg: '#0d1117', face: '#161b22', rim: '#30363d', rimInner: '#21262d',
+        hour: '#e6edf3', min: '#8b949e', sec: '#f78166',
+        dot: '#f78166', nums: '#c9d1d9', tick: '#484f58', tickMaj: '#8b949e'
+      },
+      ivory: {
+        bg: '#faf9f6', face: '#ffffff', rim: '#e8e4dd', rimInner: '#f2ede6',
+        hour: '#1c1917', min: '#57534e', sec: '#e24b4a',
+        dot: '#e24b4a', nums: '#292524', tick: '#d6d3d1', tickMaj: '#a8a29e'
+      },
+      slate: {
+        bg: '#1e293b', face: '#0f172a', rim: '#334155', rimInner: '#1e293b',
+        hour: '#e2e8f0', min: '#94a3b8', sec: '#38bdf8',
+        dot: '#38bdf8', nums: '#cbd5e1', tick: '#334155', tickMaj: '#64748b'
+      },
+      rose: {
+        bg: '#fff1f2', face: '#ffffff', rim: '#fecdd3', rimInner: '#ffe4e6',
+        hour: '#881337', min: '#be123c', sec: '#9d174d',
+        dot: '#9d174d', nums: '#4c0519', tick: '#fda4af', tickMaj: '#fb7185'
+      },
+      forest: {
+        bg: '#f0fdf4', face: '#ffffff', rim: '#bbf7d0', rimInner: '#dcfce7',
+        hour: '#14532d', min: '#166534', sec: '#15803d',
+        dot: '#15803d', nums: '#052e16', tick: '#bbf7d0', tickMaj: '#4ade80'
+      }
+    };
+
+    let T = THEMES.midnight;
+
+    function setTheme(name) {
+      T = THEMES[name];
+      canvas.style.background = T.bg;
+      document.body.style.background = T.bg;
+      document.querySelectorAll('#themeRow button').forEach(b => b.classList.remove('active'));
+      document.getElementById('btn-' + name).classList.add('active');
+    }
+
+    function drawClock() {
+      ctx.clearRect(0, 0, SIZE, SIZE);
+      drawFace();
+      drawTicks();
+      drawNumbers();
+      const now = new Date();
+      drawHands(now);
+      updateDigital(now);
+    }
+
+    function drawFace() {
+      ctx.save();
+      ctx.translate(CX, CY);
+
+      ctx.beginPath();
+      ctx.arc(0, 0, R + R * 0.12, 0, 2 * Math.PI);
+      ctx.fillStyle = T.rim;
+      ctx.fill();
+
+      ctx.beginPath();
+      ctx.arc(0, 0, R + R * 0.06, 0, 2 * Math.PI);
+      ctx.fillStyle = T.rimInner;
+      ctx.fill();
+
+      ctx.beginPath();
+      ctx.arc(0, 0, R, 0, 2 * Math.PI);
+      ctx.fillStyle = T.face;
+      ctx.fill();
+
+      ctx.restore();
+    }
+
+    function drawTicks() {
+      ctx.save();
+      ctx.translate(CX, CY);
+      for (let i = 0; i < 60; i++) {
+        const ang   = (i * Math.PI * 2) / 60 - Math.PI / 2;
+        const isMaj = i % 5 === 0;
+        const outer = R * 0.93;
+        const inner = isMaj ? R * 0.80 : R * 0.88;
+        ctx.beginPath();
+        ctx.moveTo(Math.cos(ang) * outer, Math.sin(ang) * outer);
+        ctx.lineTo(Math.cos(ang) * inner, Math.sin(ang) * inner);
+        ctx.strokeStyle = isMaj ? T.tickMaj : T.tick;
+        ctx.lineWidth   = isMaj ? R * 0.025 : R * 0.012;
+        ctx.lineCap     = 'round';
+        ctx.stroke();
+      }
+      ctx.restore();
+    }
+
+    function drawNumbers() {
+      ctx.save();
+      ctx.translate(CX, CY);
+      ctx.textAlign    = 'center';
+      ctx.textBaseline = 'middle';
+      ctx.fillStyle    = T.nums;
+      ctx.font         = `500 ${Math.round(R * 0.155)}px sans-serif`;
+      for (let n = 1; n <= 12; n++) {
+        const ang  = (n * Math.PI / 6) - Math.PI / 2;
+        const dist = R * 0.67;
+        ctx.fillText(n, Math.cos(ang) * dist, Math.sin(ang) * dist);
+      }
+      ctx.restore();
+    }
+
+    function drawHand(ang, len, width, color) {
+      ctx.save();
+      ctx.translate(CX, CY);
+      ctx.rotate(ang);
+      ctx.beginPath();
+      ctx.moveTo(0, R * 0.15);
+      ctx.lineTo(0, -len);
+      ctx.strokeStyle = color;
+      ctx.lineWidth   = width;
+      ctx.lineCap     = 'round';
+      ctx.stroke();
+      ctx.restore();
+    }
+
+    function drawHands(now) {
+      const ms  = now.getMilliseconds();
+      const sec = now.getSeconds() + ms / 1000;
+      const min = now.getMinutes() + sec / 60;
+      const hr  = (now.getHours() % 12) + min / 60;
+
+      const hrAng  = (hr  * Math.PI * 2 / 12) - Math.PI / 2;
+      const minAng = (min * Math.PI * 2 / 60) - Math.PI / 2;
+      const secAng = (sec * Math.PI * 2 / 60) - Math.PI / 2;
+
+      drawHand(hrAng,  R * 0.50, R * 0.055, T.hour);
+      drawHand(minAng, R * 0.72, R * 0.035, T.min);
+      drawHand(secAng, R * 0.78, R * 0.018, T.sec);
+
+      ctx.save();
+      ctx.translate(CX, CY);
+      ctx.beginPath();
+      ctx.arc(0, 0, R * 0.055, 0, 2 * Math.PI);
+      ctx.fillStyle = T.face;
+      ctx.fill();
+      ctx.beginPath();
+      ctx.arc(0, 0, R * 0.038, 0, 2 * Math.PI);
+      ctx.fillStyle = T.dot;
+      ctx.fill();
+      ctx.restore();
+    }
+
+    function updateDigital(now) {
+      const h = String(now.getHours()).padStart(2, '0');
+      const m = String(now.getMinutes()).padStart(2, '0');
+      const s = String(now.getSeconds()).padStart(2, '0');
+      document.getElementById('digitalTime').textContent = h + ':' + m + ':' + s;
+
+      const days   = ['Ням','Даваа','Мягмар','Лхагва','Пүрэв','Баасан','Бямба'];
+      const months = ['1-р сар','2-р сар','3-р сар','4-р сар','5-р сар','6-р сар',
+                      '7-р сар','8-р сар','9-р сар','10-р сар','11-р сар','12-р сар'];
+      document.getElementById('dateDisplay').textContent =
+    now.getDate() + ' ' + months[now.getMonth()] + ' ' + now.getFullYear();
+    }
+
+    setTheme('midnight');
+    drawClock();
+    setInterval(drawClock, 50);
+  </script>
+
+</body>
+</html>

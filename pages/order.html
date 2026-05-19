@@ -1,0 +1,281 @@
+
+ <link rel="stylesheet" href="css/style.css">
+<div style="
+  background: linear-gradient(135deg, #1a3d2b 0%, #2d6a4f 60%, #52b788 100%);
+  padding: 60px 20px;
+  text-align:center;
+  position:relative;
+  overflow:hidden;
+">
+  <div style="position:absolute;inset:0;background:radial-gradient(ellipse at 80% 20%, rgba(212,168,83,0.15) 0%,transparent 60%);"></div>
+  <div style="position:relative;z-index:1;max-width:700px;margin:auto;">
+    <div class="fade-in" style="
+      display:inline-block;
+      background:rgba(212,168,83,0.2);
+      border:1px solid rgba(212,168,83,0.4);
+      color:#d4a853;
+      padding:6px 20px;
+      border-radius:50px;
+      font-size:0.8rem;
+      font-weight:700;
+      letter-spacing:2px;
+      text-transform:uppercase;
+      margin-bottom:20px;
+    ">🛒 Хоол захиалах</div>
+    <h1 class="fade-in delay-1" style="
+      font-family:'Playfair Display',serif;
+      font-size:clamp(2rem,5vw,3rem);
+      color:#fff;
+      font-weight:900;
+      margin-bottom:12px;
+    ">Хурдан, <em style="color:#d4a853;font-style:italic">хялбар</em> захиалга</h1>
+    <p class="fade-in delay-2" style="color:rgba(255,255,255,0.75); font-size:1rem;">
+      Захиалгаа өгөөд 20 минутад хоолоо авна уу. Хүлээлт байхгүй!
+    </p>
+  </div>
+</div>
+
+<div style="background:var(--white); padding:24px 20px; box-shadow:var(--shadow-sm);">
+  <div style="max-width:700px; margin:auto; display:flex; justify-content:center; gap:0; flex-wrap:wrap;">
+
+    <div style="display:flex; align-items:center; gap:10px; padding:8px 20px;">
+      <div style="
+        width:32px; height:32px; border-radius:50%;
+        background:var(--gold); color:var(--green-dark);
+        display:flex; align-items:center; justify-content:center;
+        font-weight:800; font-size:0.9rem; flex-shrink:0;
+      ">1</div>
+      <span style="font-size:0.9rem; font-weight:600; color:var(--text-dark);">Мэдээлэл оруулах</span>
+    </div>
+
+    <div style="color:#ccc; display:flex; align-items:center; font-size:1.4rem;">›</div>
+
+    <div style="display:flex; align-items:center; gap:10px; padding:8px 20px;">
+      <div style="
+        width:32px; height:32px; border-radius:50%;
+        background:var(--green-accent); color:#fff;
+        display:flex; align-items:center; justify-content:center;
+        font-weight:800; font-size:0.9rem; flex-shrink:0;
+      ">2</div>
+      <span style="font-size:0.9rem; font-weight:600; color:var(--text-dark);">Хоол сонгох</span>
+    </div>
+
+    <div style="color:#ccc; display:flex; align-items:center; font-size:1.4rem;">›</div>
+
+    <div style="display:flex; align-items:center; gap:10px; padding:8px 20px;">
+      <div style="
+        width:32px; height:32px; border-radius:50%;
+        background:var(--green-mid); color:#fff;
+        display:flex; align-items:center; justify-content:center;
+        font-weight:800; font-size:0.9rem; flex-shrink:0;
+      ">3</div>
+      <span style="font-size:0.9rem; font-weight:600; color:var(--text-dark);">Баталгаажуулах</span>
+    </div>
+
+  </div>
+</div>
+
+<div style="max-width:1000px; margin:50px auto; padding:0 20px;">
+  <div style="display:grid; grid-template-columns:1.4fr 1fr; gap:30px; align-items:start;">
+
+    <!-- Form -->
+    <div class="card fade-in">
+      <div class="card-body" style="padding:36px;">
+        <h2 style="font-family:'Playfair Display',serif; color:var(--green-dark); margin-bottom:6px; font-size:1.5rem;">Захиалгын мэдээлэл</h2>
+        <p style="color:var(--text-gray); font-size:0.9rem; margin-bottom:28px;">Бүх талбарыг бөглөнө үү</p>
+
+        <form class="order-form" id="order-form">
+
+          <div class="form-row">
+            <div class="form-group">
+              <label for="cust-name">👤 Овог нэр *</label>
+              <input type="text" id="cust-name" placeholder="Батболд Мөнхбаяр" required>
+            </div>
+            <div class="form-group">
+              <label for="cust-phone">📞 Утасны дугаар *</label>
+              <input type="tel" id="cust-phone" placeholder="9999-9999" required>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="cust-location">📍 Хаана авах</label>
+            <select id="cust-location">
+              <option value="">Байршил сонгох</option>
+              <option>1-р байрны эхний давхар</option>
+              <option>2-р байрны нэгдүгээр давхар</option>
+              <option>Цайны газрын өрөө</option>
+              <option>Номын сангийн ойролцоо</option>
+            </select>
+          </div>
+
+          <div style="
+            background: var(--cream-dark);
+            border-radius: var(--radius);
+            padding: 20px;
+            margin-bottom: 20px;
+          ">
+            <h4 style="font-family:'Playfair Display',serif; color:var(--green-dark); margin-bottom:16px;">🍽 Хоол сонгох</h4>
+
+            <div class="form-group" style="margin-bottom:12px;">
+              <label for="food-select">Хоол *</label>
+              <select id="food-select" required>
+                <option value="">— Хоол сонгох —</option>
+                <optgroup label="🍖 Үндсэн хоол">
+                  <option value="Монгол стейк">Монгол стейк — 12,000₮</option>
+                  <option value="Гоймон">Гоймон — 4,000₮</option>
+                  <option value="Будаатай хоол">Будаатай хоол — 5,500₮</option>
+                </optgroup>
+                <optgroup label="🍔 Хурдан хоол">
+                  <option value="Бургер">Бургер — 5,000₮</option>
+                  <option value="Пицца">Пицца — 8,000₮</option>
+                  <option value="Сандвич">Сандвич — 4,500₮</option>
+                </optgroup>
+                <optgroup label="🥗 Салад & Шөл">
+                  <option value="Салад">Цэцэг байцааны салад — 3,000₮</option>
+                  <option value="Шөл">Тоорцогт шөл — 3,500₮</option>
+                </optgroup>
+                <optgroup label="☕ Ундаа">
+                  <option value="Кофе">Кофе — 2,500₮</option>
+                  <option value="Цай">Цай — 1,500₮</option>
+                  <option value="Жүүс">Жүүс — 2,000₮</option>
+                </optgroup>
+              </select>
+            </div>
+
+            <div class="form-group" style="margin-bottom:0;">
+              <label for="food-qty">Тоо ширхэг</label>
+              <div style="display:flex; align-items:center; gap:12px;">
+                <button type="button" onclick="adjustQty(-1)" style="
+                  width:36px; height:36px; border-radius:8px;
+                  border:2px solid var(--green-accent);
+                  background:white; font-size:1.2rem;
+                  cursor:pointer; color:var(--green-mid);
+                  display:flex; align-items:center; justify-content:center;
+                  font-weight:700;
+                ">−</button>
+                <input type="number" id="food-qty" value="1" min="1" max="10" style="
+                  width:70px; text-align:center; font-size:1.1rem; font-weight:700;
+                " readonly>
+                <button type="button" onclick="adjustQty(1)" style="
+                  width:36px; height:36px; border-radius:8px;
+                  border:2px solid var(--green-accent);
+                  background:white; font-size:1.2rem;
+                  cursor:pointer; color:var(--green-mid);
+                  display:flex; align-items:center; justify-content:center;
+                  font-weight:700;
+                ">+</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label>💬 Нэмэлт хүсэлт</label>
+            <textarea rows="3" placeholder="Жишээ: тарагтай биш, халуун биш..."></textarea>
+          </div>
+
+          <button class="btn btn-green" type="submit" style="width:100%; justify-content:center; padding:15px; font-size:1rem;">
+            🛒 Захиалга илгээх
+          </button>
+
+        </form>
+
+        <div class="success-msg"></div>
+
+      </div>
+    </div>
+
+    <div class="fade-in delay-1" style="position:sticky; top:90px;">
+      <div class="card" style="border:2px solid var(--cream-dark);">
+        <div class="card-body" style="padding:28px;">
+          <h3 style="font-family:'Playfair Display',serif; color:var(--green-dark); margin-bottom:6px;">Захиалгын дэлгэрэнгүй</h3>
+          <p style="font-size:0.8rem; color:var(--text-gray); margin-bottom:20px;">Өөрчлөлт автоматаар шинэчлэгдэнэ</p>
+
+          <div class="order-summary">
+            <div class="summary-row">
+              <span>Хоол</span>
+              <span id="sum-food" style="font-weight:600;">—</span>
+            </div>
+            <div class="summary-row">
+              <span>Дүн</span>
+              <span id="sum-qty">—</span>
+            </div>
+            <div class="summary-row">
+              <span>Хүргэлт</span>
+              <span id="sum-delivery">—</span>
+            </div>
+            <div class="summary-row" style="margin-top:8px; padding-top:12px; border-top:2px solid #ddd; border-bottom:none;">
+              <span style="font-family:'Playfair Display',serif; font-size:1.1rem;">Нийт дүн</span>
+              <span id="sum-total" style="color:var(--green-mid); font-family:'Playfair Display',serif; font-size:1.2rem;">—</span>
+            </div>
+          </div>
+
+          <div style="
+            background: #e8f5e9;
+            border-radius: 8px;
+            padding: 12px 16px;
+            margin-top: 16px;
+            display:flex; align-items:center; gap:10px;
+          ">
+            <span style="font-size:1.2rem;">⏱</span>
+            <span style="font-size:0.85rem; color:var(--green-dark); font-weight:600;">Бэлэн болох хугацаа: <span style="color:var(--green-mid);">~20 минут</span></span>
+          </div>
+
+          <div style="
+            background: #fff8e1;
+            border-radius: 8px;
+            padding: 12px 16px;
+            margin-top: 10px;
+            display:flex; align-items:center; gap:10px;
+          ">
+            <span style="font-size:1.2rem;">🎓</span>
+            <span style="font-size:0.85rem; color:#7b5a00; font-weight:600;">Оюутны үнэмлэхтэй <span style="color:var(--gold);">-10%</span></span>
+          </div>
+        </div>
+      </div>
+
+      <div class="card" style="margin-top:16px;">
+        <div class="card-body" style="padding:20px 24px;">
+          <h4 style="font-family:'Playfair Display',serif; color:var(--green-dark); margin-bottom:14px; font-size:1rem;">🔥 Өнөөдрийн хамгийн их захиалагдсан</h4>
+          <div style="display:flex; flex-direction:column; gap:10px;">
+            <div style="display:flex; align-items:center; gap:12px;">
+              <div style="width:36px; height:36px; border-radius:8px; background:linear-gradient(135deg,#d4622e,#f4a261); display:flex; align-items:center; justify-content:center; font-size:1.2rem;">🍔</div>
+              <div style="flex:1;">
+                <div style="font-weight:600; font-size:0.9rem;">Бургер</div>
+                <div style="font-size:0.8rem; color:var(--text-gray);">245 захиалга</div>
+              </div>
+              <div style="font-weight:700; color:var(--green-mid);">5,000₮</div>
+            </div>
+            <div style="display:flex; align-items:center; gap:12px;">
+              <div style="width:36px; height:36px; border-radius:8px; background:linear-gradient(135deg,#277da1,#4cc9f0); display:flex; align-items:center; justify-content:center; font-size:1.2rem;">🍜</div>
+              <div style="flex:1;">
+                <div style="font-weight:600; font-size:0.9rem;">Гоймон</div>
+                <div style="font-size:0.8rem; color:var(--text-gray);">198 захиалга</div>
+              </div>
+              <div style="font-weight:700; color:var(--green-mid);">4,000₮</div>
+            </div>
+            <div style="display:flex; align-items:center; gap:12px;">
+              <div style="width:36px; height:36px; border-radius:8px; background:linear-gradient(135deg,#7b2d00,#d4622e); display:flex; align-items:center; justify-content:center; font-size:1.2rem;">🥩</div>
+              <div style="flex:1;">
+                <div style="font-weight:600; font-size:0.9rem;">Монгол стейк</div>
+                <div style="font-size:0.8rem; color:var(--text-gray);">156 захиалга</div>
+              </div>
+              <div style="font-weight:700; color:var(--green-mid);">12,000₮</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<script>
+function adjustQty(delta) {
+  const input = document.getElementById('food-qty');
+  if (!input) return;
+  let val = parseInt(input.value) + delta;
+  val = Math.max(1, Math.min(10, val));
+  input.value = val;
+  input.dispatchEvent(new Event('input'));
+}
+</script>

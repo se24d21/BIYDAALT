@@ -1,0 +1,105 @@
+<html>
+    <head>
+        <title>Game</title>
+        <meta charset="UTF8">
+        <style>
+            .info{
+                background-color: silver;
+                color: black;
+                font-size: 32px;
+                padding: 10px 20px;
+                position: absolute;
+                z-index: 1;
+            }
+            #display{
+                background: #000;
+                width: 100%;
+                height: 100%;
+                position: relative;
+            }
+            .bubble{
+                position: absolute;
+                left: 100px;
+                top: 100px;
+                background-color: #f00;
+                width: 50px;
+                height: 50px;
+                border-radius: 25px;
+            }
+            .bubble div{
+                position: absolute;
+                left: 10px;
+                top: 10px;
+                background-color: #fff;
+                width: 10px;
+                height: 10px;
+                border-radius: 5px;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="info">
+            Үе: <span id="level"></span>
+            Үлдсэн бөмбөлөг: <span id="count"></span>
+        </div>
+        <div id="display"></div>
+        <script>
+            var display = document.getElementById("display");
+            var level = 1;
+            var countSpan = document.getElementById("count");
+            var levelSpan = document.getElementById("level");
+
+            var move = function(){
+                var bubbles = document.getElementsByClassName("bubble");
+                for(var i = 0; i < bubbles.length; i++){
+                    var left = parseInt(bubbles[i].style.left);
+                    var top = parseInt(bubbles[i].style.top);
+
+                    if(left + bubbles[i].moveX > display.clientWidth - 50 || left + bubbles[i].moveX < 0)
+                        bubbles[i].moveX *= -1;
+                    if(top + bubbles[i].moveY > display.clientHeight - 50 || top + bubbles[i].moveY < 0)
+                        bubbles[i].moveY *= -1;
+
+                    bubbles[i].style.left = (left + bubbles[i].moveX) + "px";
+                    bubbles[i].style.top = (top + bubbles[i].moveY) + "px";
+                }
+            };
+
+            var beginGame = function(){
+                display.innerHTML = ""; 
+                for(var i = 0; i < 9 + level; i++){
+                    var bubble = document.createElement("div");
+                    var light = document.createElement("div");
+                    bubble.className = "bubble";
+                    bubble.appendChild(light);
+
+                    bubble.style.left = Math.round(Math.random() * (display.clientWidth - 50)) + "px";
+                    bubble.style.top = Math.round(Math.random() * (display.clientHeight - 50)) + "px";
+                    bubble.style.backgroundColor = "rgb("+Math.round(Math.random() * 256) +","+Math.round(Math.random() * 256)+","+Math.round(Math.random() * 256)+")";
+
+                    bubble.moveX = Math.random() * 9 + 1;
+                    bubble.moveY = Math.random() * 9 + 1;
+
+                    bubble.addEventListener("click", function(){
+                        display.removeChild(this);
+                        countSpan.innerHTML = display.children.length;
+                        if (display.children.length == 0){
+                            if(confirm("Ta ene uyiig davlaa. daraagiin uyiig ehleh uu?")){
+                                level ++;
+                                beginGame();
+                            }
+                        }
+                    });
+
+                    display.appendChild(bubble);
+                }
+                
+                countSpan.innerHTML = display.children.length;
+                levelSpan.innerHTML = level;
+            };
+
+            setInterval(move, 100); 
+            beginGame();
+        </script>
+    </body>
+</html>
